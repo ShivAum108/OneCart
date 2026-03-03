@@ -11,9 +11,10 @@ import { userDataContext } from "../context/UserContext";
 import { useNavigate } from "react-router-dom"
 import { authDataContext } from "../context/AuthContext";
 import axios from "axios";
+import { shopDataContext } from "../context/ShopContext";
 
 function Nav() {
-    const [showSearch, setShowSearch] = useState(false);
+    const { showSearch, setShowSearch, search, setSearch } = useContext(shopDataContext);
     const [showProfile, setShowProfile] = useState(false);
     const { userData } = useContext(userDataContext);;
     const { serverUrl } = useContext(authDataContext);
@@ -47,7 +48,7 @@ function Nav() {
                     ?
                     <RiSearchFill className="w-9.5 h-9.5 cursor-pointer text-[#000000]" onClick={() => setShowSearch(false)} />
                     :
-                    <IoSearch className="w-9.5 h-9.5 cursor-pointer text-[#000000]" onClick={() => setShowSearch(true)} />
+                    <IoSearch className="w-9.5 h-9.5 cursor-pointer text-[#000000]" onClick={() => { setShowSearch(true); navigate("/collection") }} />
 
                 }
 
@@ -63,7 +64,7 @@ function Nav() {
             </div>
             {showSearch &&
                 <div className="border w-full h-20 bg-[#d8f6f9dd] absolute top-full left-0 right-0 flex justify-center items-center">
-                    <input type="text" className="lg:w-[50%] w-[80%] h-[60%] bg-[#233533] rounded-[30px] px-12.5 placeholder:text-white text-white text-[16px] md:text-[18px]" placeholder="Search here" />
+                    <input type="text" className="lg:w-[50%] w-[80%] h-[60%] bg-[#233533] rounded-[30px] px-12.5 placeholder:text-white text-white text-[16px] md:text-[18px]" placeholder="Search here" value={search} onChange={(e) => setSearch(e.target.value)} />
                 </div>
             }
             {showProfile &&
@@ -82,10 +83,10 @@ function Nav() {
             }
 
             <div className="w-full h-22.5 px-5 fixed bottom-0 left-0 bg-[#191818] text-[12px] flex justify-between items-center md:hidden">
-                <button className="text-white flex flex-col justify-center items-center gap-0.5" onClick={() => navigate("/")}><AiFillHome className="w-6.25 h-6.25" /> Home</button>
-                <button className="text-white flex flex-col justify-center items-center gap-0.5" onClick={() => navigate("/collection")}><BsFillCollectionFill className="w-6.25 h-6.25" /> Collection</button>
-                <button className="text-white flex flex-col justify-center items-center gap-0.5" onClick={() => navigate("/contact")}><IoMdContact className="w-6.25 h-6.25" /> Contact</button>
-                <button className="text-white flex flex-col justify-center items-center gap-0.5"><BsCart4 className="w-6.25 h-6.25" /> Cart</button>
+                <button className="text-white flex flex-col justify-center items-center gap-0.5 cursor-pointer" onClick={() => navigate("/")}><AiFillHome className="w-6.25 h-6.25" /> Home</button>
+                <button className="text-white flex flex-col justify-center items-center gap-0.5 cursor-pointer" onClick={() => navigate("/collection")}><BsFillCollectionFill className="w-6.25 h-6.25" /> Collection</button>
+                <button className="text-white flex flex-col justify-center items-center gap-0.5 cursor-pointer" onClick={() => navigate("/contact")}><IoMdContact className="w-6.25 h-6.25" /> Contact</button>
+                <button className="text-white flex flex-col justify-center items-center gap-0.5 cursor-pointer"><BsCart4 className="w-6.25 h-6.25" /> Cart</button>
                 <p className="border border-white absolute top-4 right-3 w-4.5 h-4.5 bg-white px-1.25 py-0.5 text-[9px] rounded-full font-semibold flex justify-center items-center">10</p>
             </div>
 

@@ -8,7 +8,7 @@ import Card from "../components/Card";
 
 function Collections() {
   let [showFilter, setShowFilter] = useState(false);
-  const { products } = useContext(shopDataContext)
+  const { products, search, showSearch } = useContext(shopDataContext)
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [category, setCategory] = useState([]);
   const [subCategory, setSubCategory] = useState([]);
@@ -17,11 +17,16 @@ function Collections() {
 
   const applyFilter = () => {
     let productCopy = products.slice();
+
+    if (showSearch && search) {
+      productCopy = productCopy.filter(item => item.name.toLowerCase().includes(search.toLowerCase()))
+    }
+
     if (category.length > 0) {
       productCopy = productCopy.filter(item => category.includes(item.category))
     }
     if (subCategory.length > 0) {
-      productCopy = subCategory.filter(item => subCategory.includes(item.subCategory))
+      productCopy = productCopy.filter(item => subCategory.includes(item.subCategory))
     }
     setFilteredProducts(productCopy);
   }
@@ -42,16 +47,37 @@ function Collections() {
     }
   }
 
+  const sortProducts = (e) => {
+    let filteredProductsCopy = filteredProducts.slice()
+    switch (sortType) {
+      case "low-high":
+        setFilteredProducts(filteredProductsCopy.sort((a, b) => (a.price - b.price)))
+        break;
+
+      case "high-low":
+        setFilteredProducts(filteredProductsCopy.sort((a, b) => b.price - a.price))
+        break;
+
+      default:
+        applyFilter();
+        break;
+    }
+  }
+
+  useEffect(() => {
+    sortProducts()
+  }, [sortType])
+
   useEffect(() => {
     setFilteredProducts(products)
   }, [products])
 
   useEffect(() => {
     applyFilter();
-  }, [category, subCategory])
+  }, [category, subCategory, search, showSearch])
 
   return (
-    <div className="min-h-screen bg-linear-to-l from-[#141414] to-[#0c2025] flex flex-col md:flex-row justify-start pt-17.5 overflow-x-hidden">
+    <div className="min-h-screen pb-25 bg-linear-to-l from-[#141414] to-[#0c2025] flex flex-col md:flex-row justify-start pt-17.5 overflow-x-hidden">
       <div className={`w-full md:w-[30vw] lg:w-[20vw] md:min-h-screen ${showFilter ? "h-auto" : "h-[8vh]"} p-5 border-r border-gray-400 text-[#aaf5fa]`}>
         <p className="text-[25px] font-semibold flex items-center justify-start gap-1.25 cursor-pointer" onClick={() => setShowFilter(prev => !prev)}>
           FILTERS
@@ -78,7 +104,7 @@ function Collections() {
       <div className="md:py-2.5">
         <div className="w-full md:w-[80vw] p-5 lg:px-12.5 flex flex-col lg:flex-row justify-between">
           <Title text1={"ALL"} text2={"COLLECTIONS"} />
-          <select name="" id="" className="w-[60%] bg-slate-600 md:w-50 h-12.5 px-2.5 text-white rounded-lg hover:border-[#4631f7] border-2">
+          <select name="" id="" className="w-[60%] bg-slate-600 md:w-50 h-12.5 px-2.5 text-white rounded-lg hover:border-[#4631f7] border-2" onChange={(e) => setSortType(e.target.value)}>
             <option value="relevant" className="w-full h-full">Sort by: Relevant</option>
             <option value="low-high" className="w-full h-full">Sort by: Low to High</option>
             <option value="high-low" className="w-full h-full">Sort by: High to Low</option>

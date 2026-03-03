@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import Background from "../components/Background";
 import Hero from "../components/Hero";
 import Product from "./Product";
+import OurPolicy from "../components/OurPolicy";
 
 
 function Home() {
@@ -25,6 +26,7 @@ function Home() {
         <Background heroCount={heroCount} />
       </div>
       <Product />
+      <OurPolicy />
     </div>
   )
 }

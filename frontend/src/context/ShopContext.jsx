@@ -5,6 +5,8 @@ export const shopDataContext = createContext()
 
 function ShopContext({ children }) {
     const [products, setProducts] = useState([]);
+    const [search, setSearch] = useState("")
+    const [showSearch, setShowSearch] = useState(false)
     const { serverUrl } = useContext(authDataContext)
     const currency = "₹";
     const delivery_fee = 40
@@ -22,7 +24,7 @@ function ShopContext({ children }) {
         getProducts()
     }, [])
 
-    const value = { products, currency, delivery_fee, getProducts }
+    const value = { products, search, setSearch, showSearch, setShowSearch, currency, delivery_fee, getProducts }
     return (
         <shopDataContext.Provider value={value}>
             {children}
