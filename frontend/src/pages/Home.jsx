@@ -3,6 +3,8 @@ import Background from "../components/Background";
 import Hero from "../components/Hero";
 import Product from "./Product";
 import OurPolicy from "../components/OurPolicy";
+import NewsLetterBox from "../components/NewsLetterBox";
+import Footer from "../components/Footer";
 
 
 function Home() {
@@ -27,6 +29,8 @@ function Home() {
       </div>
       <Product />
       <OurPolicy />
+      <NewsLetterBox />
+      <Footer />
     </div>
   )
 }
