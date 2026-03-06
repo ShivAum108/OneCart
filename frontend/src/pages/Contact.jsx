@@ -14,10 +14,10 @@ function Contact() {
           <p className="lg:w-[80%] w-full text-white font-semibold lg:text-[18px] text-[15px]">
             Our Store
           </p>
-          <p className="w-full lg:w-[80%] text-white text-[13px] md:text-[16px]">
+          <div className="w-full lg:w-[80%] text-white text-[13px] md:text-[16px]">
             <p>12345 Random Station</p>
             <p>Random City, State, India</p>
-          </p>
+          </div>
           <p className="w-full lg:w-[80%] text-white text-[13px] md:text-[16px]">
             <p>tel: +91-9876543210</p>
             <p>Email: admin@onecart.com</p>
