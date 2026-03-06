@@ -1,10 +1,11 @@
 import Title from "../components/Title"
 import about from "../assets/about.jpg"
+import NewsLetterBox from "../components/NewsLetterBox"
 
 
 function About() {
   return (
-    <div className="w-screen min-h-screen flex flex-col justify-center items-center bg-linear-to-l from-[#141414] to-[#0c2025] gap-12.5 pt-20">
+    <div className="w-[99vw] min-h-screen flex flex-col justify-center items-center bg-linear-to-l from-[#141414] to-[#0c2025] gap-12.5 pt-20">
       <Title text1={"ABOUT"} text2={"US"} />
       <div className="w-full flex flex-col lg:flex-row justify-center items-center">
         <div className="w-full lg:w-[50%] flex justify-center items-center">
@@ -25,14 +26,24 @@ function About() {
           </p>
         </div>
       </div>
-      <div className="border border-white w-full flex flex-col justify-center items-center gap-2.5">
+      <div className="w-full flex flex-col justify-center items-center gap-2.5">
         <Title text1={"WHY"} text2={"CHOOSE US"} />
-        <div className="border border-white w-[80%] flex flex-col lg:flex-row justify-center items-center py-10">
+        <div className="w-[80%] flex flex-col lg:flex-row justify-center items-center py-10">
           <div className="lg:w-[33%] w-[90%] h-62.5 border border-gray-100 flex justify-center items-center gap-5 flex-col px-10 py-2.5 text-white backdrop:blur-0.5 bg-[#ffffff0b]">
-            <b className=""></b>
+            <b className="text-[20px] font-semibold text-[#bff1f9]">Quality Assurance</b>
+            <p>We guarantee quality through strict checks, reliable sourcing, and a commitment to customer satisfaction always</p>
+          </div>
+          <div className="lg:w-[33%] w-[90%] h-62.5 border border-gray-100 flex justify-center items-center gap-5 flex-col px-10 py-2.5 text-white backdrop:blur-0.5 bg-[#ffffff0b]">
+            <b className="text-[20px] font-semibold text-[#bff1f9]">Convenience</b>
+            <p>Shop easily with fast delivery, simple navigation, secure checkout, and everything you need in one place.</p>
+          </div>
+          <div className="lg:w-[33%] w-[90%] h-62.5 border border-gray-100 flex justify-center items-center gap-5 flex-col px-10 py-2.5 text-white backdrop:blur-0.5 bg-[#ffffff0b]">
+            <b className="text-[20px] font-semibold text-[#bff1f9]">Exceptional Customer Service</b>
+            <p>Our dedicated support team ensures quick responses, helpful solutions, and a smooth shopping experience every time.</p>
           </div>
         </div>
       </div>
+      <NewsLetterBox />
     </div>
   )
 }
