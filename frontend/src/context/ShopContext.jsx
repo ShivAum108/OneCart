@@ -8,6 +8,7 @@ function ShopContext({ children }) {
     const [search, setSearch] = useState("")
     const [showSearch, setShowSearch] = useState(false)
     const { serverUrl } = useContext(authDataContext)
+    const [cartItem, setCartItem] = useState({});
     const currency = "₹";
     const delivery_fee = 40
 
@@ -18,6 +19,26 @@ function ShopContext({ children }) {
         } catch (error) {
             console.log(error);
         }
+    }
+
+    const addToCart = async () => {
+        if (!size) {
+            console.log("Select Product Size")
+            return;
+        }
+        let cartData = structuredClone(cartItem); //Clone the product
+
+        if (cartData[itemId]) {
+            if (cartData[itemId][size]) {
+                cartData[itemId][size] += 1;
+            } else {
+                cartData[itemId][size] = 1;
+            }
+        } else {
+            cartData[itemId] = {};
+            cartData[itemId][size] = 1;
+        }
+        setCartItem(cartData);
     }
 
     useEffect(() => {
