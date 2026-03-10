@@ -8,7 +8,7 @@ import RelatedProducts from "../components/RelatedProducts";
 
 function ProductDetails() {
     const { productId } = useParams()
-    const { products, currency } = useContext(shopDataContext)
+    const { products, currency, addToCart} = useContext(shopDataContext)
     const [productData, setProductData] = useState([]);
 
     const [image, setImage] = useState(null);
@@ -39,7 +39,7 @@ function ProductDetails() {
 
     return productData ? (
         <div>
-            <div className="border-2 border-green-800 w-[screen] h-[130vh] md:h-screen bg-linear-to-l from-[#141414] to-[#0c2025] flex flex-col lg:flex-row items-center justify-start gap-5">
+            <div className="w-[screen] h-[130vh] md:h-screen bg-linear-to-l from-[#141414] to-[#0c2025] flex flex-col lg:flex-row items-center justify-start gap-5">
                 <div className="lg:w-[50vw] md:w-[90vw] h-[50vh] lg:h-[90vh] mt-17.5 flex flex-col-reverse lg:flex-row justify-center items-center gap-7.5 md:gap-2.5">
                     <div className="md:w-[80%] lg:w-[20%] h-[10%] lg:h-[80%] flex lg:flex-col flex-wrap justify-center items-center gap-12.5 lg:gap-5">
                         <div className="w-12.5 md:w-25 h-12.5 md:h-27.5 bg-slate-300 border border-[#80808049] rounded-md" onClick={() => setImage(image1)}>
@@ -78,7 +78,7 @@ function ProductDetails() {
                                 <button key={index} className={`border py-2 px-4 bg-slate-300 rounded-md cursor-pointer ${item === size ? "bg-black text-[#3b92de] text-[20px]" : ""}`} onClick={() => setSize(item)}>{item}</button>
                             ))}
                         </div>
-                        <button className="text-[16px] active:bg-slate-500 cursor-pointer bg-[#495b61c9] py-2.5 px-5 rounded-2xl mt-2.5 border border-[#80808049] text-white shadow-md shadow-black">Add To Cart</button>
+                        <button className="text-[16px] active:bg-slate-500 cursor-pointer bg-[#495b61c9] py-2.5 px-5 rounded-2xl mt-2.5 border border-[#80808049] text-white shadow-md shadow-black" onClick={() => addToCart(productData._id, size)}>Add To Cart</button>
                     </div>
                     <div className="w-[90%] h-px bg-slate-700"></div>
                     <div className="w-[80%] text-[16px] text-white">

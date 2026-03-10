@@ -21,7 +21,7 @@ function ShopContext({ children }) {
         }
     }
 
-    const addToCart = async () => {
+    const addToCart = async (itemId, size) => {
         if (!size) {
             console.log("Select Product Size")
             return;
@@ -39,13 +39,26 @@ function ShopContext({ children }) {
             cartData[itemId][size] = 1;
         }
         setCartItem(cartData);
+        console.log(cartData);
+    }
+
+    const getCartCount = () => {
+        let totalCount = 0;
+
+        for (const itemId in cartItem) {
+            for (const size in cartItem[itemId]) {
+                totalCount += cartItem[itemId][size];
+            }
+        }
+
+        return totalCount;
     }
 
     useEffect(() => {
         getProducts()
     }, [])
 
-    const value = { products, search, setSearch, showSearch, setShowSearch, currency, delivery_fee, getProducts }
+    const value = { products, search, setSearch, showSearch, setShowSearch, currency, delivery_fee, getProducts, cartItem, addToCart, getCartCount, setCartItem }
     return (
         <shopDataContext.Provider value={value}>
             {children}

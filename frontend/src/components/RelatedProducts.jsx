@@ -8,7 +8,6 @@ function RelatedProducts({ category, subCategory, currentProductId }) {
 
     const { products } = useContext(shopDataContext);
     const [related, setRelated] = useState([]);
-    console.log(related)
 
     useEffect(() => {
         if (products.length > 0) {

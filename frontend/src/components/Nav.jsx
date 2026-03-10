@@ -14,9 +14,9 @@ import axios from "axios";
 import { shopDataContext } from "../context/ShopContext";
 
 function Nav() {
-    const { showSearch, setShowSearch, search, setSearch } = useContext(shopDataContext);
+    const { showSearch, setShowSearch, search, setSearch, getCartCount } = useContext(shopDataContext);
     const [showProfile, setShowProfile] = useState(false);
-    const { userData } = useContext(userDataContext);;
+    const { userData } = useContext(userDataContext);
     const { serverUrl } = useContext(authDataContext);
     const navigate = useNavigate();
 
@@ -60,7 +60,7 @@ function Nav() {
 
                 }
                 <BsCart4 className="w-7.5 h-7.5 cursor-pointer text-[#000000] hidden md:block" />
-                <p className="w-[4.5] h-[4.5] bg-black text-white text-[9px] px-1.25 py-0.5 hidden md:flex justify-center items-center absolute top-4 right-5 rounded-full">10</p>
+                <p className="w-[4.5] h-[4.5] bg-black text-white text-[9px] px-1.25 py-0.5 hidden md:flex justify-center items-center absolute top-4 right-5 rounded-full">{getCartCount()}</p>
             </div>
             {showSearch &&
                 <div className="border w-full h-20 bg-[#d8f6f9dd] absolute top-full left-0 right-0 flex justify-center items-center">
@@ -87,7 +87,7 @@ function Nav() {
                 <button className="text-white flex flex-col justify-center items-center gap-0.5 cursor-pointer" onClick={() => navigate("/collection")}><BsFillCollectionFill className="w-6.25 h-6.25" /> Collection</button>
                 <button className="text-white flex flex-col justify-center items-center gap-0.5 cursor-pointer" onClick={() => navigate("/contact")}><IoMdContact className="w-6.25 h-6.25" /> Contact</button>
                 <button className="text-white flex flex-col justify-center items-center gap-0.5 cursor-pointer"><BsCart4 className="w-6.25 h-6.25" /> Cart</button>
-                <p className="border border-white absolute top-4 right-3 w-4.5 h-4.5 bg-white px-1.25 py-0.5 text-[9px] rounded-full font-semibold flex justify-center items-center">10</p>
+                <p className="border border-white absolute top-4 right-3 w-4.5 h-4.5 bg-white px-1.25 py-0.5 text-[9px] rounded-full font-semibold flex justify-center items-center">{getCartCount()}</p>
             </div>
 
         </div>
